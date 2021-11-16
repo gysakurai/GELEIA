@@ -1,4 +1,3 @@
-from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 from io import StringIO
 import streamlit as st
@@ -20,22 +19,19 @@ def download_csv(df):
             mime='text/csv',
     )
 
-@st.cache
-def download_pdf(df):
+def download_png(df):
     fig, ax =plt.subplots(figsize=(12,4))
     ax.axis('tight')
     ax.axis('off')
     the_table = ax.table(cellText=df.values,colLabels=df.columns,loc='center',rowLabels=df.index)
     
-    pp = PdfPages("foo.pdf")
-    pp.savefig(fig, bbox_inches='tight')
-    pp.close()
+    fig.savefig("table.png", bbox_inches='tight')
 
-    with open("foo.pdf", "rb") as file:
+    with open("table.png", "rb") as file:
         btn = st.download_button(
-            label="Download PDF",
+            label="Download Image",
             data=file,
-            file_name="horario.pdf",
+            file_name="table.png",
         )
 
 st.title("Gerenciamento Grade de Horário - Teste")
@@ -67,4 +63,4 @@ with st.spinner('Wait for it...'):
 
         st.dataframe(df)
         
-        download_pdf(df)
+        download_png(df)
