@@ -1,9 +1,42 @@
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pyplot as plt
 from io import StringIO
 import streamlit as st
 import pandas as pd
 import numpy as np
 import time
 import os
+
+
+@st.cache
+# IMPORTANT: Cache the conversion to prevent computation on every rerun    
+def download_csv(df):
+    csv = convert_df(df.to_csv().encode('utf-8'))
+
+    st.download_button(
+            label="Download grade horário CSV",
+            data=csv,
+            file_name='result.csv',
+            mime='text/csv',
+    )
+
+@st.cache
+def download_pdf(df):
+    fig, ax =plt.subplots(figsize=(12,4))
+    ax.axis('tight')
+    ax.axis('off')
+    the_table = ax.table(cellText=df.values,colLabels=df.columns,loc='center',rowLabels=df.index)
+    
+    pp = PdfPages("foo.pdf")
+    pp.savefig(fig, bbox_inches='tight')
+    pp.close()
+
+    with open("foo.pdf", "rb") as file:
+        btn = st.download_button(
+            label="Download PDF",
+            data=file,
+            file_name="horario.pdf",
+        )
 
 st.title("Gerenciamento Grade de Horário - Teste")
 
@@ -30,8 +63,8 @@ with st.spinner('Wait for it...'):
         for line in bytes_data.decode('utf-8').split('\n'):
             st.write(line)
 
-        st.success("Done!")
+        df = pd.DataFrame(columns=DIAS_SEMANA, index=HORARIOS)
 
-df = pd.DataFrame(columns=DIAS_SEMANA, index=HORARIOS)
-
-st.dataframe(df)
+        st.dataframe(df)
+        
+        download_pdf(df)
