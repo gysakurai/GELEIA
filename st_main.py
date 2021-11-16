@@ -29,7 +29,7 @@ def download_png(df):
 
     with open("table.png", "rb") as file:
         btn = st.download_button(
-            label="Download Image",
+            label="Download Grade",
             data=file,
             file_name="table.png",
         )
