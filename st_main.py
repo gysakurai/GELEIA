@@ -45,7 +45,7 @@ uploaded_file = st.file_uploader(
     help = "Insira o arquivo CSV com as informações dos professores/disciplinas/horário"
 )
 
-with st.spinner('Wait for it...'):
+with st.spinner('Processando...'):
     if uploaded_file is not None:
         time.sleep(5)
         bytes_data = uploaded_file.read()
