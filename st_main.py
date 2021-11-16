@@ -5,7 +5,7 @@ import numpy as np
 import time
 import os
 
-st.title("Gerenciamento Grade de Horário")
+st.title("Gerenciamento Grade de Horário - Teste")
 
 HORARIOS = ['08:00 ~ 10:00','10:30 ~ 12:30']
 DIAS_SEMANA=['Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira']
