@@ -34,7 +34,7 @@ def download_png(df):
             file_name="table.png",
         )
 
-st.title("Gerenciamento Grade de Horário - Teste")
+st.title("GELEIA - Grade Escolar Livre Elaborada com Inteligência Artificial")
 
 HORARIOS = ['08:00 ~ 10:00','10:30 ~ 12:30']
 DIAS_SEMANA=['Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira']
