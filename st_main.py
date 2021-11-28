@@ -48,8 +48,7 @@ st.title("GELEIA - Grade Escolar Livre Elaborada com Inteligência Artificial")
 st.sidebar.header("Passos para utilização do GELEIA:")
 
 st.sidebar.subheader("1 - Criar arquivo .CSV no Google Sheets:")
-if st.sidebar.button('Abrir Google Sheets'):
-    webbrowser.open(url,new=2)
+st.sidebar.markdown(f"""[Abrir Google Sheets]({url})""")
 
 st.sidebar.subheader("2 - Realizar leitura do arquivo .CSV")
 uploaded_file = st.sidebar.file_uploader(
