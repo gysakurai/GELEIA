@@ -9,7 +9,7 @@ import os
 
 from grasp import principal
 
-url = 'https://docs.google.com/spreadsheets/d/1mWAnNjDJuNG-NpchdUmDjzPzAsuhg1b50W7x02ORhG0/template/preview'
+url = 'http://docs.google.com/spreadsheets/d/1mWAnNjDJuNG-NpchdUmDjzPzAsuhg1b50W7x02ORhG0/template/preview'
 
 HORARIOS = ['08:00 ~ 10:00','10:30 ~ 12:30']
 DIAS_SEMANA=['Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira']
