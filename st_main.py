@@ -49,7 +49,7 @@ st.sidebar.header("Passos para utilização do GELEIA:")
 
 st.sidebar.subheader("1 - Criar arquivo .CSV no Google Sheets:")
 if st.sidebar.button('Abrir Google Sheets'):
-    webbrowser.get(using='google-chrome').open(url,new=2)
+    webbrowser.open(url,new=2)
 
 st.sidebar.subheader("2 - Realizar leitura do arquivo .CSV")
 uploaded_file = st.sidebar.file_uploader(
