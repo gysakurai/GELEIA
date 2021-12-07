@@ -188,3 +188,12 @@ Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliar
     que elas ocupam na grade, é gerado um vetor do tipo [[professor, disciplina],...]
     imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro
     
+## Como utilizar o Geleia
+
+Para executar a aplicação, deve-se seguir os seguintes passos:
+
+    1) Acessar o link da aplicação no Streamlit: https://bitly.com/GELEIA_MESTUEL
+    2) Preencher a planilha com as configurações da grade e gerar o arquivo .csv
+    3) Carregar o arquivo .csv no local indicado
+    4) Aguardar o processamento
+    5) Verificar a Grade Escolar
