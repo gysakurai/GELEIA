@@ -115,7 +115,7 @@ Exemplo do algoritmo de crossover (5 posições)
 O método da mutação recebe um indivíduo como parâmetro e realiza as seguintes operações:
 
     - Selecionam-se duas posições aleatórias (A e B) no vetor que representa o indivíduo (0 a 49)
-    - Troca-se a posição A pela posição B e vice-versa
+    - Troca-se o valor que está na posição A pelo valor da que está na posição B e vice-versa
  
 Exemplo do algoritmo de Mutação (5 posições)
 
