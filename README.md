@@ -193,9 +193,9 @@ Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliar
 
 Para executar a aplicação, deve-se seguir os seguintes passos:
 
-    1) Acessar o link da aplicação no Streamlit: https://bitly.com/GELEIA_MESTUEL
-    2) Preencher a planilha com as configurações da grade e gerar o arquivo .csv
-    3) Carregar o arquivo .csv no local indicado
-    4) Aguardar o processamento
-    5) Verificar a Grade Escolar
-    6) Faça o download da imagem da grade para cada uma das salas
+1) Acessar o link da aplicação no Streamlit: https://bitly.com/GELEIA_MESTUEL
+2) Preencher a planilha com as configurações da grade e gerar o arquivo .csv
+3) Carregar o arquivo .csv no local indicado
+4) Aguardar o processamento
+5) Verificar a Grade Escolar
+6) Fazer o download da imagem da grade para cada uma das salas
