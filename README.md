@@ -104,11 +104,11 @@ Neste método são passados 2 pais como parâmetros e são gerados 2 novos filho
     
 Exemplo do algoritmo de crossover (5 posições)
 
-    - pai1 = [0,1,2,3,4]
-    - pai2 = [3,0,4,2,1]
-    - posicao_aleatoria = 2
-    - filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
-    - filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
+    pai1 = [0,1,2,3,4]
+    pai2 = [3,0,4,2,1]
+    posicao_aleatoria = 2
+    filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
+    filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
     
 #### Mutação
 
@@ -119,9 +119,72 @@ O método da mutação recebe um indivíduo como parâmetro e realiza as seguint
  
 Exemplo do algoritmo de Mutação (5 posições)
 
-    - indivíduo = [4,2,0,3,1]
-    - posicao_A = 1
-    - posicao_B = 4
-    - novo_individuo = [4,1,0,3,2]
+    indivíduo = [4,2,0,3,1]
+    posicao_A = 1
+    posicao_B = 4
+    novo_individuo = [4,1,0,3,2]
     
+#### Fitness
 
+A função ou método de fitness irá calcular o quão adequada é solução encontrada pelo AG. O cálculo baseia-se na violação das restrições definidas anteriormente (rígidas e leves).
+
+A função de fitness irá retornar um valor entre 0 e 1, e por se tratar de um problema de minimização das violações, quanto mais próximo de 0 melhor será a solução.
+
+A fórmula básica para o cálculo da função de fitness é a seguinte:
+
+    fitness = 1 - 1 / (violacoes + 1)
+
+A aplicação utiliza os seguintes valores para os pesos das violações (valores definidos empiricamente):
+
+    PESO_PROF_INDISPONIVEL = 1
+    PESO_PROF_MESMO_HORARIO = 1
+    PESO_DISC_MESMO_DIA_SALA_DIFER = 0.1
+    PESO_DISC_MESMO_DIA_SALA_IGUAL = 0.05
+    PESO_PRIMEIRO_HORARIO_VAGO = 0.1
+    PESO_SEGUNDO_HORARIO_VAGO = 0.05
+
+Para maiores detalhes sobre o método de fitness, consulte o código de sua implementação (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
+
+#### Método Principal (geleia_ga)
+
+A busca meta-heurística utilizando-se AG inicia-se com chamada ao métdo geleia_ga. 
+
+A assinatura do método geleia_ga com seus parâmetros é apresentada a seguir:
+
+    geleia_ga(url_config, 
+              tamanho_populacao=PADRAO_TAMANHO_POPULACAO,
+              geracoes=PADRAO_GERACOES,
+              probabilidade_crossover=PADRAO_PROBABILIDADE_CROSSOVER,
+              probabilidade_mutacao=PADRAO_PROBABILIDADE_MUTACAO,
+              elitismo=PADRAO_ELITISMO,
+              maximizar_fitness=PADRAO_MAXIMIZAR_FITNESS)
+    
+    onde
+    
+    url_config: Caminho para o arquivo de configuração .csv (pode ser um arquivo na internet)
+    tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução
+    probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo
+    probabilidade_mutacao: é a probabilidade de ocorrer mutacao na geração de um novo indivíduo
+    elitismo: é a definição se o algoritmo utiliza elitismo nas gerações ou não
+    maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
+        
+A seguir, apresenta-se os valores padrão utilizados pelo AG (hiperparâmetros):
+
+    PADRAO_TAMANHO_POPULACAO=200
+    PADRAO_GERACOES=100
+    PADRAO_PROBABILIDADE_CROSSOVER=0.8
+    PADRAO_PROBABILIDADE_MUTACAO=0.5
+    PADRAO_ELITISMO=True
+    PADRAO_MAXIMIZAR_FITNESS=False
+
+Importante: Para a chamada do método geleia_ga apenas o parâmetro url_config é obrigatório
+
+#### Métodos adicionais
+
+Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliares:
+
+    carrega_configuracao(url_config): Carrega o arquivo .csv definindo as configurações iniciais da grade
+    gera_grade(aulas, solucao): A partir das aulas que existem e da solução que apresenta as posições 
+    que elas ocupam na grade, é gerado um vetor do tipo [[professor, disciplina],...]
+    imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro
+    
