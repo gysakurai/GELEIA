@@ -162,10 +162,11 @@ A assinatura do método geleia_ga com seus parâmetros é apresentada a seguir:
     onde
     
     url_config: Caminho para o arquivo de configuração .csv (pode ser um arquivo na internet)
-    tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução
+    tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema
     probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo
-    probabilidade_mutacao: é a probabilidade de ocorrer mutacao na geração de um novo indivíduo
-    elitismo: é a definição se o algoritmo utiliza elitismo nas gerações ou não
+    probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo
+    elitismo: é a definição se o algoritmo utiliza elitismo nas gerações 
+             (define se mantém a melhor solução da geração anterior ou não)
     maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
         
 A seguir, apresenta-se os valores padrão utilizados pelo AG (hiperparâmetros):
