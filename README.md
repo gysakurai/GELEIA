@@ -70,10 +70,58 @@ A planilha possui ainda um conjunto de scripts que auxiliam o usuário na geraç
 
 Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo de configuração, dessa forma, ela pode ser dispensada por usuários mais experientes capazes de criar o arquivo .csv diretamente.
 
+Exemplo de arquivo de configuração de grade de horário:
+
+    "Professor";"Disciplina";"Horarios Semanais";"Disponibilidade"
+    "Professor 1";"Disciplina 1";2;1020
+    "Professor 2";"Disciplina 2";2;1011
+    "Professor 3";"Disciplina 3";4;991
+    "Professor 4";"Disciplina 4";4;767
+
 ### Algoritmo de meta-heurística para elaboração da Grade com base na configuração
 
 Conforme mencionado anteriormente, o algoritmo selecionado para a implementação da meta-heurística foi o Algoritmo Genético (AG ou GA).
+
 Por se tratar de um algoritmo amplamente conhecido e utilizado na Inteligência Computacional, optou-se por adotar a solução implementada pela biblioteca python pyeasyga (https://github.com/remiomosowon/pyeasyga).
-Para que AG pudesse resolver o problema proposto, foi preciso realizar a implementação/sobrescrita dos métodos de Criação de Indivíduo (create_individual), Crossover (crossover), Mutação (mutate) e Fitness (fitness). Nestes métodos foram incorporadas as heurísticas relativas à construção da Grade Escolar. 
+
+Para que o AG pudesse resolver o problema proposto, foi preciso realizar a implementação/sobrescrita dos métodos de Criação de Indivíduo (create_individual), Crossover (crossover), Mutação (mutate) e Fitness (fitness). Nestes métodos foram incorporadas as heurísticas relativas à construção da Grade Escolar. 
+  
+#### Criação de Indivíduo
+
+Para o AG, um indivíduo é uma sequência de aulas, ou mais especificamente, de posições das aulas dentro da grade escolar.
+
+Assim, o método de criação de indivíduo gera um vetor dos números de 0 a 49 distribuídos aleatoriamente. Estes números representam a posição que cada uma das aulas pré-definidas ocupa na grade.
+
+#### Crossover
+
+Neste método são passados 2 pais como parâmetros e são gerados 2 novos filhos utilizando-se a seguinte abordagem:
+
+    - Seleciona-se uma posição aleatória no vetor que representa o indivíduo (0 a 49)
+    - Utilizando-se a posição selecionada separa-se uma parte do pai1 que vai para o filho1
+    - A outra parte do filho1 será composta por todas as posições de aula do pai2 que não existem ainda no filho1
+    - Utilizando-se a posição selecionada separa-se uma parte do pai2 que vai para o filho2
+    - A outra parte do filho2 será composta por todas as posições de aula do pai1 que não existem ainda no filho2
     
+Exemplo do algoritmo de crossover (5 posições)
+
+    - pai1 = [0,1,2,3,4]
+    - pai2 = [3,0,4,2,1]
+    - posicao_aleatoria = 2
+    - filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
+    - filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
     
+#### Mutação
+
+O método da mutação recebe um indivíduo como parâmetro e realiza as seguintes operações:
+
+    - Selecionam-se duas posições aleatórias (A e B) no vetor que representa o indivíduo (0 a 49)
+    - Troca-se a posição A pela posição B e vice-versa
+ 
+Exemplo do algoritmo de Mutação (5 posições)
+
+    - indivíduo = [4,2,0,3,1]
+    - posicao_A = 1
+    - posicao_B = 4
+    - novo_individuo = [4,1,0,3,2]
+    
+
