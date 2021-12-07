@@ -147,7 +147,7 @@ Para maiores detalhes sobre o método de fitness, consulte o código de sua impl
 
 #### Método Principal (geleia_ga)
 
-A busca meta-heurística utilizando-se AG inicia-se com chamada ao métdo geleia_ga. 
+A busca meta-heurística utilizando-se AG inicia-se com chamada ao método geleia_ga. 
 
 A assinatura do método geleia_ga com seus parâmetros é apresentada a seguir:
 
@@ -197,3 +197,4 @@ Para executar a aplicação, deve-se seguir os seguintes passos:
     3) Carregar o arquivo .csv no local indicado
     4) Aguardar o processamento
     5) Verificar a Grade Escolar
+    6) Faça o download da imagem da grade para cada uma das salas
