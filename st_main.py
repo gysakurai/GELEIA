@@ -8,8 +8,9 @@ import time
 import os
 
 from grasp import principal
+from grasp import ga
 
-url = 'http://docs.google.com/spreadsheets/d/1mWAnNjDJuNG-NpchdUmDjzPzAsuhg1b50W7x02ORhG0/template/preview'
+url = 'https://docs.google.com/spreadsheets/d/1aW7UF_39EvxF_X4GnAKx1JOwjAPlNarZo3GAD4olM6A/template/preview'
 
 HORARIOS = ['08:00 ~ 10:00','10:30 ~ 12:30']
 DIAS_SEMANA=['Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira']
@@ -63,7 +64,9 @@ my_bar = st.progress(0)
 
 with st.spinner('Processando...'):
     if uploaded_file is not None:
-        result = principal.principal(url_caso_de_teste=uploaded_file,max_iteracoes=100,calcula_solucao_inicial=False)
+        # result = principal.principal(url_caso_de_teste=uploaded_file,max_iteracoes=100,calcula_solucao_inicial=False)
+        result = ga.geleia_ga(url_config=uploaded_file)
+        # print(result)
         result = result[0]
 
         # print(result)
