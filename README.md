@@ -219,4 +219,5 @@ Para executar a aplicação, deve-se seguir os seguintes passos:
 
 A imagem, a seguir, representa a interface gráfica da aplicação no https://streamlit.io:
 
+![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Geleia.png)
 
