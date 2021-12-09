@@ -62,9 +62,9 @@ Os participantes deste projeto exerceram os seguintes papéis ou atividades na c
 | Nome do Participante/Aluno | Papel Exercido |
 |---|---|
 |Julia Gil Santos|Construção dos Casos de Testes, Teste e Análise da Função de Fitness, Documentação|
-|Marcus Vinicius Alencar Terra|Coordenação do Projeto, Planilha de Entrada de Dados, Teste da Aplicação, Documentação|
+|Marcus Vinicius Alencar Terra|Coordenação do Projeto, Construção da Planilha de Dados, Teste da Aplicação, Documentação|
 |Vitor de Castro Silva|Análise, Implementação e Testes do Algoritmo de Meta-heurística (GA), Documentação|
-|Guilherme Yukio Sakurai|Integração de Código/Tecnologias, Construção de GUI no Streamlit, Deploy da Aplicação, Documentação|
+|Guilherme Yukio Sakurai|Integração de Código, Construção de GUI no Streamlit, Deploy da Aplicação, Documentação|
 
 ### Planilha para a definição dos dados de entrada (Configuração da Grade)
 
