@@ -57,6 +57,15 @@ A construção da solução proposta dividiu-se em 3 partes principais:
     - Algoritmo de meta-heurística para elaboração da Grade com base na configuração
     - Construção de ambiente no Streamlit para a operação do sistema e apresentação dos resultados
     
+Os participantes deste projeto exerceram os seguintes papéis ou atividades na construção da solução:
+
+| Nome do Participante/Aluno | Papel Exercido |
+|---|---|
+|Julia Gil Santos|Construção dos Casos de Testes, Teste e Análise da Função de Fitness, Documentação|
+|Marcus Vinicius Alencar Terra|Coordenação do Projeto, Planilha de Entrada de Dados, Teste da Aplicação, Documentação|
+|Vitor de Castro Silva|Análise, Implementação e Testes do Algoritmo de Meta-heurística (GA), Documentação|
+|Guilherme Yukio Sakurai|Integração de Código/Tecnologias, Construção de GUI no Streamlit, Deploy da Aplicação, Documentação|
+
 ### Planilha para a definição dos dados de entrada (Configuração da Grade)
 
 A aplicação utiliza-se de uma planilha do Google Sheets (https://docs.google.com/spreadsheets/d/1aW7UF_39EvxF_X4GnAKx1JOwjAPlNarZo3GAD4olM6A/edit?usp=sharing) para que o usuário realize a definição dos seguinte dados de entrada:
