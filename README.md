@@ -51,7 +51,7 @@ A Grade de horários escolares, elaborada através da aplicação proposta, base
     
 ## Detalhamento Técnico
     
-A construção da solução proposta dividiu-se em 3 partes principais:
+O projeto Geleia tem o Python como linguagem principal de desenvolvimento e sua construção dividiu-se em 3 partes principais:
 
     - Planilha para a definição dos dados de entrada (Configuração da Grade)
     - Algoritmo de meta-heurística para elaboração da Grade com base na configuração
@@ -61,10 +61,10 @@ Os participantes deste projeto exerceram os seguintes papéis ou atividades na c
 
 | Nome do Participante/Aluno | Papel Exercido |
 |---|---|
-|Julia Gil Santos|Construção dos Casos de Testes, Teste e Análise da Função de Fitness, Documentação|
-|Marcus Vinicius Alencar Terra|Coordenação do Projeto, Construção da Planilha de Dados, Teste da Aplicação, Documentação|
-|Vitor de Castro Silva|Análise, Implementação e Testes do Algoritmo de Meta-heurística (GA), Documentação|
-|Guilherme Yukio Sakurai|Integração de Código, Construção de GUI no Streamlit, Deploy da Aplicação, Documentação|
+|Julia Gil Santos|Construção dos Casos de Testes; Teste e Análise da Função de Fitness; Documentação|
+|Marcus Vinicius Alencar Terra|Coordenação do Projeto; Construção da Planilha de Dados; Teste da Aplicação; Documentação|
+|Vitor de Castro Silva|Análise, Implementação e Testes do Algoritmo de Meta-heurística (GA); Documentação|
+|Guilherme Yukio Sakurai|Integração de Código; Construção de GUI no Streamlit; Deploy da Aplicação; Documentação|
 
 ### Planilha para a definição dos dados de entrada (Configuração da Grade)
 
@@ -79,14 +79,20 @@ A planilha possui ainda um conjunto de scripts que auxiliam o usuário na geraç
 
 Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo de configuração, dessa forma, ela pode ser dispensada por usuários mais experientes capazes de criar o arquivo .csv diretamente.
 
+#### Cálculo da disponibilidade dos professores
+
+A disponibilidade é dada pela configuração dos horários que o professor tem disponível conforme figura abaixo:
+
+
 Exemplo de arquivo de configuração de grade de horário:
-
-    "Professor";"Disciplina";"Horarios Semanais";"Disponibilidade"
-    "Professor 1";"Disciplina 1";2;1020
-    "Professor 2";"Disciplina 2";2;1011
-    "Professor 3";"Disciplina 3";4;991
-    "Professor 4";"Disciplina 4";4;767
-
+```
+"Professor";"Disciplina";"Horarios Semanais";"Disponibilidade"
+"Professor 1";"Disciplina 1";2;1020
+"Professor 2";"Disciplina 2";2;1011
+"Professor 3";"Disciplina 3";4;991
+"Professor 4";"Disciplina 4";4;767
+"Professor 1";"Disciplina 5";4;1020
+```
 ### Algoritmo de meta-heurística para elaboração da Grade com base na configuração
 
 Conforme mencionado anteriormente, o algoritmo selecionado para a implementação da meta-heurística foi o Algoritmo Genético (AG ou GA).
@@ -112,13 +118,13 @@ Neste método são passados 2 pais como parâmetros e são gerados 2 novos filho
     - A outra parte do filho2 será composta por todas as posições de aula do pai1 que não existem ainda no filho2
     
 Exemplo do algoritmo de crossover (5 posições)
-
-    pai1 = [0,1,2,3,4]
-    pai2 = [3,0,4,2,1]
-    posicao_aleatoria = 2
-    filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
-    filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
-    
+```    
+pai1 = [0,1,2,3,4]
+pai2 = [3,0,4,2,1]
+posicao_aleatoria = 2
+filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
+filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
+```        
 #### Mutação
 
 O método da mutação recebe um indivíduo como parâmetro e realiza as seguintes operações:
@@ -127,12 +133,12 @@ O método da mutação recebe um indivíduo como parâmetro e realiza as seguint
     - Troca-se o valor que está na posição A pelo valor da que está na posição B e vice-versa
  
 Exemplo do algoritmo de Mutação (5 posições)
-
-    indivíduo = [4,2,0,3,1]
-    posicao_A = 1
-    posicao_B = 4
-    novo_individuo = [4,1,0,3,2]
-    
+```
+indivíduo = [4,2,0,3,1]
+posicao_A = 1
+posicao_B = 4
+novo_individuo = [4,1,0,3,2]
+```        
 #### Fitness
 
 A função ou método de fitness irá calcular o quão adequada é solução encontrada pelo AG. O cálculo baseia-se na violação das restrições definidas anteriormente (rígidas e leves).
@@ -140,18 +146,18 @@ A função ou método de fitness irá calcular o quão adequada é solução enc
 A função de fitness irá retornar um valor entre 0 e 1, e por se tratar de um problema de minimização das violações, quanto mais próximo de 0 melhor será a solução.
 
 A fórmula básica para o cálculo da função de fitness é a seguinte:
-
-    fitness = 1 - 1 / (violacoes + 1)
-
+```    
+fitness = 1 - 1 / (violacoes + 1)
+```    
 A aplicação utiliza os seguintes valores para os pesos das violações (valores definidos empiricamente):
-
-    PESO_PROF_INDISPONIVEL = 1
-    PESO_PROF_MESMO_HORARIO = 1
-    PESO_DISC_MESMO_DIA_SALA_DIFER = 0.1
-    PESO_DISC_MESMO_DIA_SALA_IGUAL = 0.05
-    PESO_PRIMEIRO_HORARIO_VAGO = 0.1
-    PESO_SEGUNDO_HORARIO_VAGO = 0.05
-
+```    
+PESO_PROF_INDISPONIVEL = 1
+PESO_PROF_MESMO_HORARIO = 1
+PESO_DISC_MESMO_DIA_SALA_DIFER = 0.1
+PESO_DISC_MESMO_DIA_SALA_IGUAL = 0.05
+PESO_PRIMEIRO_HORARIO_VAGO = 0.1
+PESO_SEGUNDO_HORARIO_VAGO = 0.05
+```    
 Para maiores detalhes sobre o método de fitness, consulte o código de sua implementação (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
 
 #### Método Principal (geleia_ga)
@@ -159,35 +165,37 @@ Para maiores detalhes sobre o método de fitness, consulte o código de sua impl
 A busca meta-heurística utilizando-se AG inicia-se com chamada ao método geleia_ga. 
 
 A assinatura do método geleia_ga com seus parâmetros é apresentada a seguir:
-
-    geleia_ga(url_config, 
-              tamanho_populacao=PADRAO_TAMANHO_POPULACAO,
-              geracoes=PADRAO_GERACOES,
-              probabilidade_crossover=PADRAO_PROBABILIDADE_CROSSOVER,
-              probabilidade_mutacao=PADRAO_PROBABILIDADE_MUTACAO,
-              elitismo=PADRAO_ELITISMO,
-              maximizar_fitness=PADRAO_MAXIMIZAR_FITNESS)
-    
-    onde
-    
-    url_config: Caminho para o arquivo de configuração .csv (pode ser um arquivo na internet)
-    tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema
-    probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo
-    probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo
-    elitismo: é a definição se o algoritmo utiliza elitismo nas gerações 
-             (define se mantém a melhor solução da geração anterior ou não)
-    maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
-        
+```
+geleia_ga(url_config, 
+          tamanho_populacao=PADRAO_TAMANHO_POPULACAO,
+          geracoes=PADRAO_GERACOES,
+          probabilidade_crossover=PADRAO_PROBABILIDADE_CROSSOVER,
+          probabilidade_mutacao=PADRAO_PROBABILIDADE_MUTACAO,
+          elitismo=PADRAO_ELITISMO,
+          maximizar_fitness=PADRAO_MAXIMIZAR_FITNESS)
+```    
+onde:
+```        
+url_config: Caminho (URL) para o arquivo de configuração .csv (pode ser um arquivo na internet)
+tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema
+probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo
+probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo
+elitismo: é a definição se o algoritmo utiliza elitismo nas gerações 
+         (define se mantém a melhor solução da geração anterior ou não)
+maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
+```            
 A seguir, apresenta-se os valores padrão utilizados pelo AG (hiperparâmetros):
-
-    PADRAO_TAMANHO_POPULACAO=200
-    PADRAO_GERACOES=100
-    PADRAO_PROBABILIDADE_CROSSOVER=0.8
-    PADRAO_PROBABILIDADE_MUTACAO=0.5
-    PADRAO_ELITISMO=True
-    PADRAO_MAXIMIZAR_FITNESS=False
-
+```    
+PADRAO_TAMANHO_POPULACAO=200
+PADRAO_GERACOES=100
+PADRAO_PROBABILIDADE_CROSSOVER=0.8
+PADRAO_PROBABILIDADE_MUTACAO=0.5
+PADRAO_ELITISMO=True
+PADRAO_MAXIMIZAR_FITNESS=False
+```    
 Importante: Para a chamada do método geleia_ga apenas o parâmetro url_config é obrigatório
+
+Exemplo de chamada
 
 #### Métodos adicionais
 
@@ -208,3 +216,7 @@ Para executar a aplicação, deve-se seguir os seguintes passos:
 4) Aguardar o processamento
 5) Verificar a Grade Escolar
 6) Fazer o download da imagem da grade para cada uma das salas
+
+A imagem, a seguir, representa a interface gráfica da aplicação no https://streamlit.io:
+
+
