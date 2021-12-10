@@ -79,11 +79,22 @@ A planilha possui ainda um conjunto de scripts que auxiliam o usuário na geraç
 
 Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo de configuração, dessa forma, ela pode ser dispensada por usuários mais experientes capazes de criar o arquivo .csv diretamente.
 
-#### Cálculo da disponibilidade dos professores
+
 
 A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles, conforme demonstrado na figura abaixo:
+![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Disponibilidades.png)
 
-Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba "Disponibilidade" com as disciplinas que eles devem ministrar, a figura a seguir apresenta um exemplo do uso:
+Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba anterior "Disponibilidade" com as disciplinas que eles devem ministrar, indicando a quantidade de horários semanais que cada disciplina deve ter. 
+
+A figura a seguir apresenta um exemplo do uso da aba Dados:
+![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Dados.png)
+
+#### Cálculo da disponibilidade dos professores
+
+Na aba "Dados", a coluna "Disponibilidade" é um representação decimal da indisponibilidade de cada professor, é uma coluna somente para leitura e que faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
+
+A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se a seguinte fórmula:
+
 
 Exemplo de arquivo de configuração de grade de horário:
 ```
