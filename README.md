@@ -81,7 +81,7 @@ Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo
 
 #### Cálculo da disponibilidade dos professores
 
-A disponibilidade é dada pela configuração dos horários que o professor tem disponível conforme figura abaixo:
+A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles conforme figura abaixo:
 
 
 Exemplo de arquivo de configuração de grade de horário:
@@ -100,36 +100,39 @@ Conforme mencionado anteriormente, o algoritmo selecionado para a implementaçã
 Por se tratar de um algoritmo amplamente conhecido e utilizado na Inteligência Computacional, optou-se por adotar a solução implementada pela biblioteca python pyeasyga (https://github.com/remiomosowon/pyeasyga).
 
 Para que o AG pudesse resolver o problema proposto, foi preciso realizar a implementação/sobrescrita dos métodos de Criação de Indivíduo (create_individual), Crossover (crossover), Mutação (mutate) e Fitness (fitness). Nestes métodos foram incorporadas as heurísticas relativas à construção da Grade Escolar. 
-  
+
+Para maiores detalhes sobre a implementação do AG, consulte o seu código-fonte em: (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
+
 #### Criação de Indivíduo
 
 Para o AG, um indivíduo é uma sequência de aulas, ou mais especificamente, de posições das aulas dentro da grade escolar.
 
-Assim, o método de criação de indivíduo gera um vetor dos números de 0 a 49 distribuídos aleatoriamente. Estes números representam a posição que cada uma das aulas pré-definidas ocupa na grade.
+Assim, o método de criação de indivíduo gera uma lista dos números de 0 a 49 distribuídos aleatoriamente. Estes números representam a posição que cada uma das aulas pré-definidas irá ocupar na grade.
 
 #### Crossover
 
 Neste método são passados 2 pais como parâmetros e são gerados 2 novos filhos utilizando-se a seguinte abordagem:
 
-    - Seleciona-se uma posição aleatória no vetor que representa o indivíduo (0 a 49)
+    - Seleciona-se uma posição de corte aleatória entre 0 a 49 
+      (todas as posições possíveis na lista que representa o indivíduo) 
     - Utilizando-se a posição selecionada separa-se uma parte do pai1 que vai para o filho1
-    - A outra parte do filho1 será composta por todas as posições de aula do pai2 que não existem ainda no filho1
-    - Utilizando-se a posição selecionada separa-se uma parte do pai2 que vai para o filho2
-    - A outra parte do filho2 será composta por todas as posições de aula do pai1 que não existem ainda no filho2
+    - A outra parte do filho1 será composta por todas as posições de aula do pai2 que ainda não existem no filho1
+    - Utilizando-se novamente a posição selecionada separa-se uma parte do pai2 que vai para o filho2
+    - A outra parte do filho2 será composta por todas as posições de aula do pai1 que ainda não existem no filho2
     
 Exemplo do algoritmo de crossover (5 posições)
 ```    
-pai1 = [0,1,2,3,4]
-pai2 = [3,0,4,2,1]
-posicao_aleatoria = 2
-filho1 = [0,1] + [3,4,2] = [0,1,3,4,2]
-filho2 = [3,0] + [1,2,4] = [3,0,1,2,4]
+pai1 = [0,2,3,4,1]
+pai2 = [4,0,1,2,3]
+posicao_de_corte_aleatoria = 2
+filho1 = [0,2] + [4,1,3] = [0,2,4,1,3]
+filho2 = [4,0] + [2,3,1] = [4,0,2,3,1]
 ```        
 #### Mutação
 
 O método da mutação recebe um indivíduo como parâmetro e realiza as seguintes operações:
 
-    - Selecionam-se duas posições aleatórias (A e B) no vetor que representa o indivíduo (0 a 49)
+    - Selecionam-se duas posições aleatórias (A e B) na lista que representa o indivíduo (entre 0 e 49)
     - Troca-se o valor que está na posição A pelo valor da que está na posição B e vice-versa
  
 Exemplo do algoritmo de Mutação (5 posições)
@@ -158,7 +161,6 @@ PESO_DISC_MESMO_DIA_SALA_IGUAL = 0.05
 PESO_PRIMEIRO_HORARIO_VAGO = 0.1
 PESO_SEGUNDO_HORARIO_VAGO = 0.05
 ```    
-Para maiores detalhes sobre o método de fitness, consulte o código de sua implementação (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
 
 #### Método Principal (geleia_ga)
 
@@ -176,13 +178,14 @@ geleia_ga(url_config,
 ```    
 onde:
 ```        
-url_config: Caminho (URL) para o arquivo de configuração .csv (pode ser um arquivo na internet)
-tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema
-probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo
-probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo
-elitismo: é a definição se o algoritmo utiliza elitismo nas gerações 
-         (define se mantém a melhor solução da geração anterior ou não)
+url_config: Caminho (URL) para o arquivo de configuração .csv (pode ser um arquivo na internet) - Tipo: String 
+tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema - Tipo: int
+probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo - Tipo: float
+probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo - Tipo: float
+elitismo: é a definição se o algoritmo utiliza elitismo nas gerações
+         (define se mantém a melhor solução da geração anterior ou não) - Tipo: boolean
 maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
+                   (em tese, este valor sempre será 'False') - Tipo: boolean
 ```            
 A seguir, apresenta-se os valores padrão utilizados pelo AG (hiperparâmetros):
 ```    
@@ -195,8 +198,38 @@ PADRAO_MAXIMIZAR_FITNESS=False
 ```    
 Importante: Para a chamada do método geleia_ga apenas o parâmetro url_config é obrigatório
 
-Exemplo de chamada
+Exemplos de chamadas do método principal geleia_ga:
 
+a) Arquivo local com os demais parâmetros no valor padrão
+```
+solucao = geleia_ga('<arquivo_local>.csv')
+
+ou 
+
+solucao = geleia_ga(url_config='<arquivo_local>.csv')
+```
+b) Arquivo remoto com o tamanho da populacao = 100
+```
+solucao = geleia_ga('http://<endereco_na_internet>/<arquivo_remoto>.csv', tamanho_populacao=100)
+```
+c) Arquivo local com o todos os parâmetros preenchidos
+```
+solucao = geleia_ga(url_config='<arquivo_local>.csv', 
+                    tamanho_populacao=50,
+                    probabilidade_crossover=0.9,
+                    probabilidade_mutacao=0.3,
+                    elitismo=False,
+                    maximizar_fitness=False)
+```
+
+O tipo de retorno do método geleia_ga é um vetor, ou lista, de 2 posições, onde a primeira posição representa o vetor da solução encontrada (Grade Escolar Completa), com tuplas do tipo [Professor, Disciplina], e a segunda posição é o valor da função de fitness para esta solução (número real entre 0 e 1). 
+```
+[solucao_encontrada, fitness_da_solucao] 
+```
+Exemplo de retorno do método geleia_ga:
+```
+[ [ ['Professor1','Disciplina1'] , ['Professor2','Disciplina2'] , ... , ['Professor1','Disciplina7'] ] , 0.1 ]
+```
 #### Métodos adicionais
 
 Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliares:
@@ -206,13 +239,15 @@ Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliar
     que elas ocupam na grade, é gerado um vetor do tipo [[professor, disciplina],...]
     imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro
     
+A implementação completa do AG encontra-se em: (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
+    
 ## Como utilizar o Geleia
 
 Para executar a aplicação, deve-se seguir os seguintes passos:
 
 1) Acessar o link da aplicação no Streamlit: https://bitly.com/GELEIA_MESTUEL
-2) Preencher a planilha com as configurações da grade e gerar o arquivo .csv
-3) Carregar o arquivo .csv no local indicado
+2) Acessar e preencher a planilha com as configurações da grade 
+3) Gerar, a partir da planilha, o arquivo .csv e carregá-lo no local indicado
 4) Aguardar o processamento
 5) Verificar a Grade Escolar
 6) Fazer o download da imagem da grade para cada uma das salas
