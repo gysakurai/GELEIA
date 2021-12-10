@@ -15,7 +15,7 @@ Alunos:
     - Marcus Vinicius Alencar Terra - marcus.vinicius.terra@uel.br
     - Vitor de Castro Silva - vitor.castro.silva@uel.br
     - Guilherme Yukio Sakurai - guilhermeyukio@uel.br
-    - Julia Gil - jugilsantos@gmail.com
+    - Julia Gil Santos - jugilsantos@gmail.com
 
 ## Premissas da Grade de Horários
 
