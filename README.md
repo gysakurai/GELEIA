@@ -86,15 +86,17 @@ A disponibilidade de cada professor é dada pela configuração, através da pla
 
 Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba anterior "Disponibilidade" com as disciplinas que eles devem ministrar, indicando a quantidade de horários semanais que cada disciplina deve ter. 
 
-A figura a seguir apresenta um exemplo do uso da aba Dados:
+A figura a seguir apresenta um exemplo de preenchimento da aba Dados:
 ![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Dados.png)
 
 #### Cálculo da disponibilidade dos professores
 
-Na aba "Dados", a coluna "Disponibilidade" é um representação decimal da indisponibilidade de cada professor, é uma coluna somente para leitura e que faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
+Nota-se que na aba "Dados", a coluna "Disponibilidade" é um representação decimal da disponibilidade de cada professor, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
 
-A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se a seguinte fórmula:
+A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se a codificação binário para decimal, conforme detalhamento a seguir:
 
+
+Na aba "Dados", o usuário, ao clicar em "Clique para exportar CSV", receberá um arquivo com a extensão '.csv' e com o formato esperado pela aplicação Geleia.
 
 Exemplo de arquivo de configuração de grade de horário:
 ```
