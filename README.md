@@ -91,10 +91,20 @@ A figura a seguir apresenta um exemplo de preenchimento da aba Dados:
 
 #### Cálculo da disponibilidade dos professores
 
-Nota-se que na aba "Dados", a coluna "Disponibilidade" é um representação decimal da disponibilidade de cada professor, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
+Nota-se que na aba "Dados", a coluna "Disponibilidade" é um representação decimal da disponibilidade de cada **professor**, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
 
 A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se a codificação binário para decimal, conforme detalhamento a seguir:
 
+    Considerando que cada horário pode ter apenas 2 valores com relação à disponibilidade do professor 
+    ("Disponível" ou "Indisponível"), optamos por representar essa disponibilidade como um valor binário 
+    (0 = Indisponível, 1 = Disponível).
+    
+    Nas premissas propostas neste projeto, ficou definido que existem 2 horários diários durante 5 dias na semana, 
+    o que totaliza 10 horários possíveis de aulas  para cada professor. Dessa forma, é possível entender que teremos 
+    10 valores binários, para cada professor, para representar a disponibilidade em cada um dos horários, ou seja, 
+    a lista de disponibilidade de um professor será um conjunto de número binários: 
+    
+    Ex.: [0, 1, 0, 0, 1, 1, 1, 1, 1, 1] 
 
 Na aba "Dados", o usuário, ao clicar em "Clique para exportar CSV", receberá um arquivo com a extensão '.csv' e com o formato esperado pela aplicação Geleia.
 
