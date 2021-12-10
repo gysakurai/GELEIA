@@ -81,8 +81,9 @@ Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo
 
 #### Cálculo da disponibilidade dos professores
 
-A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles conforme figura abaixo:
+A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles, conforme demonstrado na figura abaixo:
 
+Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba "Disponibilidade" com as disciplinas que eles devem ministrar, a figura a seguir apresenta um exemplo do uso:
 
 Exemplo de arquivo de configuração de grade de horário:
 ```
