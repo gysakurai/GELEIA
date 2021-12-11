@@ -340,7 +340,13 @@ Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliar
    imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro e o valor de fitness
     
 A implementação completa do AG encontra-se em: (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
-    
+
+.
+
+.
+
+.
+
 ## Como utilizar o Geleia
 
 Para executar a aplicação, deve-se seguir os seguintes passos:
