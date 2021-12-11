@@ -166,6 +166,8 @@ Um exemplo de arquivo de configuração de grade de horário é apresentado a se
 
 
 
+.
+.
 
 ### Algoritmo de meta-heurística para elaboração da Grade com base na configuração
 
