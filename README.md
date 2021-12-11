@@ -163,6 +163,10 @@ Um exemplo de arquivo de configuração de grade de horário é apresentado a se
 "Professor 4";"Disciplina 4";4;767
 "Professor 1";"Disciplina 5";4;1020
 ```
+
+
+
+
 ### Algoritmo de meta-heurística para elaboração da Grade com base na configuração
 
 Conforme mencionado anteriormente, o algoritmo selecionado para a implementação da meta-heurística foi o Algoritmo Genético (AG ou GA).
