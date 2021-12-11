@@ -1,6 +1,6 @@
 # GELEIA - Grade Escolar Livre Elaborada com Inteligência Artificial
 
-Projeto para a construção de uma aplicação web, baseada em streamlit (https://streamlit.io/), de geração automática de grade escolar (timetable) utilizando um algoritmo de meta-heurística.
+Projeto para a construção de uma aplicação web, baseada em streamlit (https://streamlit.io/), de geração automática de grade escolar (*timetable*) utilizando um algoritmo de meta-heurística.
 
 Versão V1: **06/12/2021**
 
@@ -12,16 +12,17 @@ Disciplina: Inteligência Computacional
 
 Alunos:
 
-    - Marcus Vinicius Alencar Terra - marcus.vinicius.terra@uel.br
-    - Vitor de Castro Silva - vitor.castro.silva@uel.br
     - Guilherme Yukio Sakurai - guilhermeyukio@uel.br
     - Julia Gil Santos - jugilsantos@gmail.com
+    - Marcus Vinicius Alencar Terra - marcus.vinicius.terra@uel.br
+    - Vitor de Castro Silva - vitor.castro.silva@uel.br
+    
 
 ## Premissas da Grade de Horários
 
 A Grade de horários escolares, elaborada através da aplicação proposta, baseia-se nas seguintes premissas:
 
-    - A grade deverá representar o horário completo contendo todas as aulas definidas pelo usuário;
+    - A grade deverá apresentar o horário completo contendo todas as aulas definidas pelo usuário;
     - A grade será construída considerando uma semana de 5 dias (segunda a sexta) com 2 horários para aula
     por dia (08:00-10:00 e 10:30 - 12:30), assim a grade terá um total de 10 horários por semana;
     - O número de salas de aula disponíveis simultaneamente é 5, sendo que todas as salas são iguais e podem 
@@ -47,13 +48,13 @@ A Grade de horários escolares, elaborada através da aplicação proposta, base
     Restrições Leves (Soft Constraints) - Penalização Menor
     - Caso a carga horária de uma aula seja maior que um 1 horário por semana, é desejável que as aulas não 
     sejam na sequência imediata;
-    - É desejável que não existam "buracos" (horários vagos sem aula) na grade de horário;
+    - É desejável que não existam horários vagos entre as aulas ("buracos") na grade de horário;
     
 ## Detalhamento Técnico
     
 O projeto Geleia tem o Python como linguagem principal de desenvolvimento e sua construção dividiu-se em 3 partes principais:
 
-    - Planilha para a definição dos dados de entrada (Configuração da Grade)
+    - Planilha para a definição dos dados de entrada (Configuração da Grade Escolar)
     - Algoritmo de meta-heurística para elaboração da Grade com base na configuração
     - Construção de ambiente no Streamlit para a operação do sistema e apresentação dos resultados
     
@@ -73,7 +74,7 @@ A aplicação utiliza-se de uma planilha do Google Sheets (https://docs.google.c
     - Professores
     - Disciplinas
     - Carga horária semanal de cada disciplina
-    - Lista dos horários em que os professores estarão indisponíveis
+    - Lista dos horários em que os professores estarão disponíveis
     
 A planilha possui ainda um conjunto de scripts que auxiliam o usuário na geração do arquivo de configuração da grade (formato csv). Este arquivo é necessário para a execução do algoritmo de meta-heurística (AG).
 
@@ -81,17 +82,17 @@ Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo
 
 
 
-A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles, conforme demonstrado na figura abaixo:
+A disponibilidade de cada professor é dada pela configuração, através da aba "Disponibilidades" da planilha, dos horários disponíveis de cada um deles, conforme demonstrado na figura abaixo:
 ![Planilha_Aba_Disponibilidades](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Disponibilidades.png)
 
-Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba anterior "Disponibilidade" com as disciplinas que eles devem ministrar, indicando a quantidade de horários semanais que cada disciplina deve ter. 
+Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba anterior "Disponibilidades" com as disciplinas que eles devem ministrar, indicando a carga horária semanal que cada disciplina deve ter. 
 
 A figura a seguir apresenta um exemplo de preenchimento da aba Dados:
 ![Planilha Aba Dados](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Dados.png)
 
 #### Cálculo da disponibilidade dos professores
 
-Nota-se que na aba "Dados", a coluna "Disponibilidade" é uma representação decimal da disponibilidade de cada **professor**, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
+Nota-se que na aba "Dados", a coluna "Disponibilidade" é uma representação decimal da disponibilidade de cada professor, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
 
 A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se uma codificação de binário para decimal, conforme detalhamento a seguir:
 
@@ -141,19 +142,19 @@ Aplicando-se a fórmula acima no exemplo, é possível encontrar o valor da codi
          C =  1*2⁰ + 1*2¹ + 0*2² + 0*2³ + 1*2⁴ + 0*2⁵ + 1*2⁶ + 1*2⁷ + 0*2⁸ + 1*2⁹ 
          C = 723
 
-Quando o arquivo de configuração, que contém os valores codificados em decimal, é processado pelo algoritmo do Geleia, este número decimal é convertido de volta para uma lista de valores binários.
+Quando o arquivo de configuração, que contém os valores codificados em decimal, é processado pelo algoritmo do Geleia, este número decimal é convertido de volta para a lista de valores binários.
 
-A idéia da codificação em decimal teve por objetivo simplificar o envio dos dados com as configurações/restrições da grade escolar, pois através dela foi possível enviar todas as informações em um único arquivo '.csv'
+A idéia da codificação em decimal teve por objetivo simplificar o envio dos dados das configurações/restrições da grade escolar, pois através desta codificação foi possível enviar todas as informações em um único arquivo '.csv' de forma trivial.
 
 Importante: A disponibilidade está vinculada apenas ao professor, assim ela deve se repetir em todas as linhas do arquivo de configuração em que o mesmo professor aparecer.
 
 #### Exportação dos dados da planilha para a aplicação Geleia
 
-O Geleia processa como entrada um arquivo .csv com os dados dos professores, disciplinas, quantidade de horários e disponibilidades. 
+Como já mencionado, o Geleia processa como entrada um arquivo .csv com os dados dos professores, disciplinas, carga horária semanal e disponibilidades. 
 
-Para gerar este arquivo com as configurações/restrições da grade escolar, o usuário deve clicar em "Clique para exportar CSV" na aba "Dados" da planilha, neste momento um programa (script) irá gerar o arquivo de configuração com a extensão '.csv' no formato esperado pela aplicação Geleia.
+Para gerar este arquivo com as configurações/restrições da grade escolar a partir da planilha, o usuário deve clicar em "Clique para exportar CSV" na aba "Dados", neste momento um programa (script) irá gerar o arquivo de configuração com a extensão '.csv' no formato esperado pela aplicação Geleia.
 
-A seguir, é apresentado um exemplo de arquivo de configuração de grade de horário:
+Um exemplo de arquivo de configuração de grade de horário é apresentado a seguir:
 ```
 "Professor";"Disciplina";"Horarios Semanais";"Disponibilidade"
 "Professor 1";"Disciplina 1";2;1020
@@ -168,7 +169,14 @@ Conforme mencionado anteriormente, o algoritmo selecionado para a implementaçã
 
 Por se tratar de um algoritmo amplamente conhecido e utilizado na Inteligência Computacional, optou-se por adotar a solução implementada pela biblioteca python pyeasyga (https://github.com/remiomosowon/pyeasyga).
 
-Para que o AG pudesse resolver o problema proposto, foi preciso realizar a implementação/sobrescrita dos métodos de Criação de Indivíduo (create_individual), Crossover (crossover), Mutação (mutate) e Fitness (fitness). Nestes métodos foram incorporadas as heurísticas relativas à construção da Grade Escolar. 
+Para que o AG pudesse resolver o problema proposto, foi preciso realizar a implementação/sobrescrita dos métodos de:
+
+- Criação de Indivíduo (create_individual) 
+- Crossover (crossover) 
+- Mutação (mutate) 
+- Fitness (fitness). 
+
+Nestes métodos foram incorporadas as heurísticas relativas à construção da Grade Escolar. 
 
 Para maiores detalhes sobre a implementação do AG, consulte o seu código-fonte em: (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
 
@@ -176,7 +184,12 @@ Para maiores detalhes sobre a implementação do AG, consulte o seu código-font
 
 Para o AG, um indivíduo é uma sequência de aulas, ou mais especificamente, de posições das aulas dentro da grade escolar.
 
-Assim, o método de criação de indivíduo gera uma lista dos números de 0 a 49 distribuídos aleatoriamente. Estes números representam a posição que cada uma das aulas pré-definidas irá ocupar na grade.
+Assim, o método de criação de indivíduo gera uma lista de números inteiros de 0 a 49 distribuídos aleatoriamente. Estes números representam a posição que cada uma das aulas pré-definidas irá ocupar na grade. 
+
+Sendo que:
+    
+    - A posição 0 representa a primeira aula na primeira sala no primeiro horário de segunda-feira 
+    - A posição 49 representa a última aula na última sala no último horário de sexta-feira 
 
 #### Crossover
 
