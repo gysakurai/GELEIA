@@ -82,12 +82,12 @@ Obs.: a planilha é uma ferramenta suavizadora utilizada na geração do arquivo
 
 
 A disponibilidade de cada professor é dada pela configuração, através da planilha, dos horários disponíveis de cada um deles, conforme demonstrado na figura abaixo:
-![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Disponibilidades.png)
+![Planilha_Aba_Disponibilidades](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Disponibilidades.png)
 
 Na aba "Dados" da planilha, o usuário irá relacionar os professores inseridos na aba anterior "Disponibilidade" com as disciplinas que eles devem ministrar, indicando a quantidade de horários semanais que cada disciplina deve ter. 
 
 A figura a seguir apresenta um exemplo de preenchimento da aba Dados:
-![Gui Geleia](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Dados.png)
+![Planilha Aba Dados](https://github.com/gysakurai/GELEIA/blob/main/telas/Planilha_Aba_Dados.png)
 
 #### Cálculo da disponibilidade dos professores
 
@@ -108,7 +108,8 @@ optou-se por representar essa disponibilidade como um valor binário:
 
 Dessa forma, é possível entender que: 
  
-    Existem 10 valores binários (0 ou 1), para cada professor, representando a disponibilidade em cada um dos horários
+    Existem, para cada professor, 10 valores binários (0 ou 1) que representam 
+    a disponibilidade em cada um dos horários 
 
 Isto é, a lista de disponibilidade de um professor é definida por um conjunto de dígitos binários
     
@@ -118,6 +119,33 @@ Isto é, a lista de disponibilidade de um professor é definida por um conjunto 
 
 Supondo as seguintes disponibilidades para o "Professor X":
 
+![Exemplo_Professor_X](https://github.com/gysakurai/GELEIA/blob/main/telas/Ex_professor_x.png)
+
+Quando as disponibilidades acima são codificadas em valores binários, tem-se a seguinte lista *D*:
+
+    D = [1, 1, 0, 0, 1, 0, 1, 1, 0, 1]
+
+Considerando cada valor da lista como um dígito binário e a posição na lista como sendo o expoente do número 2 para a conversão em decimal, é possível representar a lista de disponibilidades de um professor em um único número decimal através da seguinte fórmula:
+
+![Codificacao](https://github.com/gysakurai/GELEIA/blob/main/telas/Codificacao.png)
+
+onde:
+
+    D é a lista binária de disponibilidades
+    p é a posição atual na lista D 
+    t é o tamanho da lista D
+    
+Aplicando-se a fórmula acima no exemplo, é possível encontrar o valor da codificação *C*:
+
+    Para D = [1,     1,     0,     0,     1,     0,     1,     1,     0,     1] então
+         C =  1*2⁰ + 1*2¹ + 0*2² + 0*2³ + 1*2⁴ + 0*2⁵ + 1*2⁶ + 1*2⁷ + 0*2⁸ + 1*2⁹ 
+         C = 723
+
+Quando o arquivo de configuração, que contém os valores codificados em decimal, é processado pelo algoritmo do Geleia, este número decimal é convertido de volta para uma lista de valores binários.
+
+A idéia da codificação em decimal teve por objetivo simplificar o envio dos dados com as configurações/restrições da grade escolar, pois através dela foi possível enviar todas as informações em um único arquivo '.csv'
+
+Importante: A disponibilidade está vinculada apenas ao professor, assim ela deve se repetir em todas as linhas do arquivo de configuração em que o mesmo professor aparecer.
 
 #### Exportação dos dados da planilha para a aplicação Geleia
 
