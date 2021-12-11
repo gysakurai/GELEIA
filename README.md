@@ -199,6 +199,8 @@ Sendo que:
 
 .
 
+.
+
 #### Crossover
 
 Neste método são passados 2 pais como parâmetros e são gerados 2 novos filhos utilizando-se a seguinte abordagem:
