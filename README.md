@@ -167,7 +167,7 @@ Um exemplo de arquivo de configuração de grade de horário é apresentado a se
 
 
 .
-.
+
 
 ### Algoritmo de meta-heurística para elaboração da Grade com base na configuração
 
@@ -196,6 +196,8 @@ Sendo que:
     
     - A posição 0 representa a primeira aula na primeira sala no primeiro horário de segunda-feira 
     - A posição 49 representa a última aula na última sala no último horário de sexta-feira 
+
+.
 
 #### Crossover
 
