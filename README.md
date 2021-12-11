@@ -260,14 +260,19 @@ geleia_ga(url_config,
 ```    
 onde:
 ```        
-url_config: Caminho (URL) para o arquivo de configuração .csv (pode ser um arquivo na internet) - Tipo: String 
-tamanho_populacao: é o tamanho inicial da população utilizada pelo AG para a resolução do problema - Tipo: int
-probabilidade_crossover: é a probabilidade de ocorrer crossover na geração de um novo indivíduo - Tipo: float
-probabilidade_mutacao: é a probabilidade de ocorrer mutação na geração de um novo indivíduo - Tipo: float
-elitismo: é a definição se o algoritmo utiliza elitismo nas gerações
-         (define se mantém a melhor solução da geração anterior ou não) - Tipo: boolean
-maximizar_fitness: indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
-                   (em tese, este valor sempre será 'False') - Tipo: boolean
+url_config: <String> - Caminho (URL) para o arquivo de configuração .csv (pode ser um arquivo na internet)
+      
+tamanho_populacao: <int> - É o tamanho inicial da população utilizada pelo AG para a resolução do problema 
+             
+probabilidade_crossover: <float> - É a probabilidade de ocorrer crossover na geração de um novo indivíduo
+                   
+probabilidade_mutacao: <float> - É a probabilidade de ocorrer mutação na geração de um novo indivíduo
+
+elitismo: <boolean> É a definição se o algoritmo utiliza elitismo nas gerações
+         (define se mantém a melhor solução da geração anterior ou não) 
+    
+maximizar_fitness: <boolean> Indica se o AG deve ser utilizado para maximizar ou minimizar a função de fitness
+                   (em tese, este valor sempre será 'False') 
 ```            
 A seguir, apresenta-se os valores padrão utilizados pelo AG (hiperparâmetros):
 ```    
@@ -296,7 +301,7 @@ solucao = geleia_ga('http://<endereco_na_internet>/<arquivo_remoto>.csv', tamanh
 ```
 c) Arquivo local com o todos os parâmetros preenchidos
 ```
-solucao = geleia_ga(url_config='<arquivo_local>.csv', 
+solucao = geleia_ga(url_config='./<dir_local>/<arquivo_local>.csv', 
                     tamanho_populacao=50,
                     probabilidade_crossover=0.9,
                     probabilidade_mutacao=0.3,
@@ -304,11 +309,11 @@ solucao = geleia_ga(url_config='<arquivo_local>.csv',
                     maximizar_fitness=False)
 ```
 
-O tipo de retorno do método geleia_ga é um vetor, ou lista, de 2 posições, onde a primeira posição representa o vetor da solução encontrada (Grade Escolar Completa), com tuplas do tipo [Professor, Disciplina], e a segunda posição é o valor da função de fitness para esta solução (número real entre 0 e 1). 
+O tipo de retorno do método geleia_ga é uma lista, ou vetor, de 2 posições, onde a primeira posição representa o vetor da solução encontrada (Grade Escolar Completa), com tuplas do tipo [Professor, Disciplina], e a segunda posição é o valor da função de fitness para esta solução (número real entre 0 e 1). 
 ```
 [solucao_encontrada, fitness_da_solucao] 
 ```
-Exemplo de retorno do método geleia_ga:
+Segue abaixo um exemplo de valor de retorno do método geleia_ga:
 ```
 [ [ ['Professor1','Disciplina1'] , ['Professor2','Disciplina2'] , ... , ['Professor1','Disciplina7'] ] , 0.1 ]
 ```
@@ -316,10 +321,13 @@ Exemplo de retorno do método geleia_ga:
 
 Além dos métodos citados acima, a aplicação possui ainda 3 métodos auxiliares:
 
-    carrega_configuracao(url_config): Carrega o arquivo .csv definindo as configurações iniciais da grade
-    gera_grade(aulas, solucao): A partir das aulas que existem e da solução que apresenta as posições 
-    que elas ocupam na grade, é gerado um vetor do tipo [[professor, disciplina],...]
-    imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro
+   carrega_configuracao(url_config): Carrega o arquivo .csv definindo as configurações iniciais da grade
+   
+   gera_grade(aulas, solucao): A partir das aulas que existem e da solução que apresenta as posições 
+                               que elas ocupam na grade, é gerado um vetor do tipo 
+                               [[professor, disciplina],...]
+                               
+   imprime_solucao(solucao): Imprime em modo texto a solução passada como parâmetro e o valor de fitness
     
 A implementação completa do AG encontra-se em: (https://github.com/gysakurai/GELEIA/blob/main/grasp/ga.py).
     
