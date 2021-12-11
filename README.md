@@ -91,24 +91,41 @@ A figura a seguir apresenta um exemplo de preenchimento da aba Dados:
 
 #### Cálculo da disponibilidade dos professores
 
-Nota-se que na aba "Dados", a coluna "Disponibilidade" é um representação decimal da disponibilidade de cada **professor**, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
+Nota-se que na aba "Dados", a coluna "Disponibilidade" é uma representação decimal da disponibilidade de cada **professor**, esta é uma coluna somente para leitura e faz referência direta à coluna "Codificação" da Aba "Disponibilidades".
 
-A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se a codificação binário para decimal, conforme detalhamento a seguir:
+A coluna "Codificação", por sua vez, é calculada automaticamente pela planilha utilizando-se uma codificação de binário para decimal, conforme detalhamento a seguir:
 
-    Considerando que cada horário pode ter apenas 2 valores com relação à disponibilidade do professor 
-    ("Disponível" ou "Indisponível"), optamos por representar essa disponibilidade como um valor binário 
-    (0 = Indisponível, 1 = Disponível).
+1) Considerando que cada horário pode ter apenas 2 valores com relação à disponibilidade do professor:
+
+    "Disponível" ou "Indisponível"
+
+optou-se por representar essa disponibilidade como um valor binário: 
+
+    0 = Indisponível
+    1 = Disponível
     
-    Nas premissas propostas neste projeto, ficou definido que existem 2 horários diários durante 5 dias na semana, 
-    o que totaliza 10 horários possíveis de aulas  para cada professor. Dessa forma, é possível entender que teremos 
-    10 valores binários, para cada professor, para representar a disponibilidade em cada um dos horários, ou seja, 
-    a lista de disponibilidade de um professor será um conjunto de número binários: 
+2) Nas premissas propostas neste projeto, ficou definido que existem apenas 2 horários diários durante 5 dias na semana, ou seja, existem 10 horários possíveis de aulas para cada professor. 
+
+Dessa forma, é possível entender que: 
+ 
+    Existem 10 valores binários (0 ou 1), para cada professor, representando a disponibilidade em cada um dos horários
+
+Isto é, a lista de disponibilidade de um professor é definida por um conjunto de dígitos binários
     
     Ex.: [0, 1, 0, 0, 1, 1, 1, 1, 1, 1] 
+    
+3) Com base nesta lista é realizada a codificação dos dígitos binários em um número decimal, conforme exemplo completo a seguir:
 
-Na aba "Dados", o usuário, ao clicar em "Clique para exportar CSV", receberá um arquivo com a extensão '.csv' e com o formato esperado pela aplicação Geleia.
+Supondo as seguintes disponibilidades para o "Professor X":
 
-Exemplo de arquivo de configuração de grade de horário:
+
+#### Exportação dos dados da planilha para a aplicação Geleia
+
+O Geleia processa como entrada um arquivo .csv com os dados dos professores, disciplinas, quantidade de horários e disponibilidades. 
+
+Para gerar este arquivo com as configurações/restrições da grade escolar, o usuário deve clicar em "Clique para exportar CSV" na aba "Dados" da planilha, neste momento um programa (script) irá gerar o arquivo de configuração com a extensão '.csv' no formato esperado pela aplicação Geleia.
+
+A seguir, é apresentado um exemplo de arquivo de configuração de grade de horário:
 ```
 "Professor";"Disciplina";"Horarios Semanais";"Disponibilidade"
 "Professor 1";"Disciplina 1";2;1020
